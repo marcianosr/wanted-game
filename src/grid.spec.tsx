@@ -1,25 +1,27 @@
-import { describe, expect, it, Mock, vitest } from "vitest";
+import { describe, expect, it } from "vitest";
 import { generateGrid } from "./grid";
 
 describe("generateGrid", () => {
-  it("generates a grid with random cells", () => {
-    const size = 4;
-    const grid = generateGrid(size, "red");
+	it("generates a grid with random cells", () => {
+		const size = 4;
+		const grid = generateGrid(size, "red");
 
-    expect(grid.length).toBe(4);
-    expect(grid[0].length).toBe(4);
-  });
+		expect(grid.length).toBe(4);
+		expect(grid[0].length).toBe(4);
+	});
 
-  it("given a target, the target only occurs once in the grid", () => {
-    const size = 4;
-    const target = "yellow";
+	it("given a target, the target only occurs once in the grid", () => {
+		const size = 4;
+		const target = "yellow";
 
-    const grid = generateGrid(size, target);
+		const grid = generateGrid(size, target);
 
-    console.log(grid);
+		console.log(grid);
 
-    const targetCount = grid.flat().filter((cell) => cell === target).length;
+		const targetCount = grid
+			.flat()
+			.filter((cell) => cell === target).length;
 
-    expect(targetCount).toBe(1);
-  });
+		expect(targetCount).toBe(1);
+	});
 });
