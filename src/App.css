@@ -1,0 +1,29 @@
+#root {
+  height: 100vh;
+}
+
+.moveYPositive {
+  animation: moveYPositive 6s infinite linear;
+}
+
+.moveYNegative {
+  animation: moveYNegative 6s infinite linear;
+}
+
+@keyframes moveYPositive {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes moveYNegative {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
