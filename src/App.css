@@ -1,29 +1,43 @@
 #root {
-  height: 100vh;
+	height: 100vh;
 }
 
 .moveYPositive {
-  animation: moveYPositive 6s infinite linear;
+	animation: moveYPositive 6s infinite linear;
 }
 
 .moveYNegative {
-  animation: moveYNegative 6s infinite linear;
+	animation: moveYNegative 6s infinite linear;
+}
+
+.rotate {
+	animation: rotation 6s infinite linear;
+	transform-origin: center;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 @keyframes moveYPositive {
-  0% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(-100vh);
-  }
+	0% {
+		transform: translateY(100vh);
+	}
+	100% {
+		transform: translateY(-100vh);
+	}
 }
 
 @keyframes moveYNegative {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
+	0% {
+		transform: translateY(-100vh);
+	}
+	100% {
+		transform: translateY(100vh);
+	}
 }

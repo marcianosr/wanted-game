@@ -3,19 +3,61 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	--field-container: 390px;
 }
 
-body {
+.container {
+	width: var(--field-container);
+}
+
+.grid-container {
+	display: grid;
+	gap: 8px;
+	grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+	justify-content: center;
+}
+
+.mixed {
+	position: relative;
+
+	> * {
+		position: absolute;
+	}
+}
+
+.move {
+	position: relative;
+	width: 100vw;
+
+	> * {
+		position: absolute;
+		top: 50%; /* Start vertically centered in the viewport */
+		animation: moveFromRightToLeft 10s infinite linear;
+		transform: translateY(-50%); /* Center vertically */
+	}
+}
+
+@keyframes moveFromRightToLeft {
+	0% {
+		transform: translateX(-100vw); /* Start above the screen */
+	}
+	50% {
+		transform: translateX(0); /* Fully visible in the middle */
+	}
+	100% {
+		transform: translateX(100vw); /* Exit below the screen */
+	}
 }

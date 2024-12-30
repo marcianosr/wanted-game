@@ -16,8 +16,6 @@ describe("generateGrid", () => {
 
 		const grid = generateGrid(size, target);
 
-		console.log(grid);
-
 		const targetCount = grid
 			.flat()
 			.filter((cell) => cell === target).length;

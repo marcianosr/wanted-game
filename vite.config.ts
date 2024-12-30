@@ -11,4 +11,10 @@ export default defineConfig({
 		},
 	},
 	base: "/wanted-game",
+	test: {
+		setupFiles: ["./test/setup.ts"],
+		environment: "jsdom",
+		include: ["./src/**/*.spec.tsx", "./src/**/*.spec.ts"],
+		globals: true,
+	},
 });
