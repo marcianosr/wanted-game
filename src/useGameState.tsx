@@ -15,21 +15,21 @@ export type GameState = {
 };
 
 type Direction = "up" | "down" | "left" | "right";
-type Speed = "slow" | "medium" | "fast";
 
 export type TargetType = "red" | "blue" | "green" | "yellow" | "purple";
+
+export type LevelType = {
+	move: {
+		direction: Direction | null;
+	};
+	mixed: boolean;
+};
 
 export type LevelConfig = {
 	target: TargetType;
 	size: number;
 	layout: Character[][];
-	type: {
-		move: {
-			direction: Direction | null;
-			speed: Speed | null;
-		};
-		mixed: boolean;
-	};
+	type: LevelType;
 };
 
 const MAX_ROW_SIZE = 12;
@@ -55,7 +55,6 @@ export const generateConfigLevel = (currentLevel: number): LevelConfig => {
 		type: {
 			move: {
 				direction: null,
-				speed: null,
 			},
 			mixed: handleMaxCharactersInField(size),
 		},
@@ -74,7 +73,6 @@ const GameStateContext = createContext<GameStateContextProps>({
 			type: {
 				move: {
 					direction: null,
-					speed: null,
 				},
 				mixed: false,
 			},

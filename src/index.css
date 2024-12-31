@@ -23,14 +23,14 @@
 	width: var(--field-container);
 }
 
-.grid-container {
+.gridContainer {
 	display: grid;
 	gap: 8px;
 	grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
 	justify-content: center;
 }
 
-.mixed {
+.mixedContainer {
 	position: relative;
 
 	> * {
@@ -38,26 +38,27 @@
 	}
 }
 
-.move {
+.moveContainer {
 	position: relative;
 	width: 100vw;
 
 	> * {
-		position: absolute;
+		/* Only needed wehn also mixed */
+		/* position: absolute; */
 		top: 50%; /* Start vertically centered in the viewport */
-		animation: moveFromRightToLeft 10s infinite linear;
+		animation: move 10s infinite linear;
 		transform: translateY(-50%); /* Center vertically */
 	}
 }
 
-@keyframes moveFromRightToLeft {
+@keyframes move {
 	0% {
-		transform: translateX(-100vw); /* Start above the screen */
+		transform: translateX(calc(var(--direction, 1) * -100vw));
 	}
 	50% {
-		transform: translateX(0); /* Fully visible in the middle */
+		transform: translateX(0);
 	}
 	100% {
-		transform: translateX(100vw); /* Exit below the screen */
+		transform: translateX(calc(var(--direction, 1) * 100vw));
 	}
 }

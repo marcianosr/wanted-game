@@ -12,7 +12,8 @@
 		"preview": "vite preview",
 		"test": "vitest --enviroment jsdom",
 		"predeploy": "yarn run build",
-		"deploy": "gh-pages -d dist"
+		"deploy": "gh-pages -d dist",
+		"storybook": "storybook dev -p 6006"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",
@@ -21,6 +22,13 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.9.0",
+		"@storybook/addon-essentials": "^8.4.7",
+		"@storybook/addon-interactions": "^8.4.7",
+		"@storybook/addon-links": "^8.4.7",
+		"@storybook/addon-onboarding": "^8.4.7",
+		"@storybook/addon-viewport": "^8.4.7",
+		"@storybook/react": "^8.4.7",
+		"@storybook/react-vite": "^8.4.7",
 		"@testing-library/dom": "^10.4.0",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.1.0",
@@ -37,6 +45,7 @@
 		"globals": "^15.9.0",
 		"jsdom": "^25.0.1",
 		"postcss": "^8.4.47",
+		"storybook": "^8.4.7",
 		"tailwindcss": "^3.4.13",
 		"typescript": "^5.5.3",
 		"typescript-eslint": "^8.0.1",

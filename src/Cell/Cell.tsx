@@ -24,11 +24,12 @@ const Cell = ({ cell, onClick }: CellProps) => {
 	});
 
 	const isTarget = cell === gameState.config.target;
+
 	return (
 		<div
 			onClick={onClick}
 			data-cell-color={cell}
-			className={clsx("cursor-pointer", "size-14", {
+			className={clsx("cursor-pointer", "size-12", {
 				mixed: type.mixed ? randomPosition.current : undefined,
 			})}
 			data-is-target={isTarget ? "target" : undefined}
