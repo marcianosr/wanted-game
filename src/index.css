@@ -16,21 +16,41 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--field-container: 390px;
+	--field-container: 900px;
+}
+
+.viewport {
+	/* width: var(--field-container); */
+	width: 100%;
+	margin: 0 auto;
 }
 
 .container {
-	width: var(--field-container);
+	/* width: var(--field-container); */
+	margin: auto;
 }
 
-.gridContainer {
-	display: grid;
-	gap: 8px;
-	grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+.container.vertical {
+	display: flex;
 	justify-content: center;
 }
 
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.row.moveRowVertical {
+	flex-direction: column;
+}
+
+.cell {
+	flex-shrink: 0;
+}
+
 .mixedContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
 	position: relative;
 
 	> * {
@@ -38,27 +58,64 @@
 	}
 }
 
-.moveContainer {
+.moveRowVertical {
+	--animationSpeed: 10s; /* Common speed */
 	position: relative;
-	width: 100vw;
-
+	animation: moveVertical var(--animationSpeed) infinite linear;
 	> * {
-		/* Only needed wehn also mixed */
-		/* position: absolute; */
-		top: 50%; /* Start vertically centered in the viewport */
-		animation: move 10s infinite linear;
+		top: 50%; /* Center vertically */
 		transform: translateY(-50%); /* Center vertically */
 	}
 }
 
-@keyframes move {
+.moveRowHorizontal {
+	--animationSpeed: 10s; /* Common speed */
+	position: relative;
+	animation: moveHorizontal var(--animationSpeed) infinite linear;
+	> * {
+		top: 50%; /* Center vertically */
+		transform: translateY(-50%); /* Center vertically */
+	}
+}
+
+/* Direction for Left Movement */
+.moveRowLeft {
+	--directionX: -1; /* Move left */
+}
+
+/* Direction for Right Movement */
+.moveRowRight {
+	--directionX: 1; /* Move right */
+}
+
+.moveRowUp {
+	--directionY: -1;
+}
+
+.moveRowDown {
+	--directionY: 1;
+}
+
+@keyframes moveHorizontal {
 	0% {
-		transform: translateX(calc(var(--direction, 1) * -100vw));
+		transform: translateX(calc(var(--directionX) * -100vw));
 	}
 	50% {
 		transform: translateX(0);
 	}
 	100% {
-		transform: translateX(calc(var(--direction, 1) * 100vw));
+		transform: translateX(calc(var(--directionX) * 100vw));
+	}
+}
+
+@keyframes moveVertical {
+	0% {
+		transform: translateY(calc(var(--directionY) * -100vh));
+	}
+	50% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(calc(var(--directionY) * 100vh));
 	}
 }

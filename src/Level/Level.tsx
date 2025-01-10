@@ -1,7 +1,11 @@
-import { Fragment } from "react";
 import clsx from "clsx";
-import Cell from "../Cell/Cell";
-import { generateConfigLevel, LevelType, useGameState } from "../useGameState";
+import Cell, { FACE_SIZE } from "../Cell/Cell";
+import {
+	Direction,
+	generateConfigLevel,
+	LevelType,
+	useGameState,
+} from "../useGameState";
 import { Character } from "../grid";
 
 type LevelProps = {
@@ -11,7 +15,6 @@ type LevelProps = {
 
 const Level = ({ type, layout }: LevelProps) => {
 	const { gameState, setGameState } = useGameState();
-	const isMovingLevel = type.move.direction !== null;
 
 	const selectCell = (e: React.MouseEvent<HTMLElement>) => {
 		if (
@@ -31,25 +34,46 @@ const Level = ({ type, layout }: LevelProps) => {
 		});
 	};
 
+	const moveLookup = new Map(type.move?.map((move) => [move.index, move]));
+
+	console.log("layout", layout);
+
 	return (
 		<div
 			className={clsx("container", {
-				gridContainer: !type.mixed,
-				mixedContainer: type.mixed,
-				moveContainer: isMovingLevel,
+				vertical: type.move?.some(
+					(move) =>
+						move.direction === "up" || move.direction === "down"
+				),
 			})}
-			style={{
-				gridTemplateColumns: `repeat(${gameState.config.size}, 1fr)`,
-				"--direction": type.move.direction === "left" ? -1 : 1,
-			}}
 		>
-			{layout.map((row, i) => (
-				<Fragment key={i}>
-					{row.map((cell, j) => (
-						<Cell key={j} cell={cell} onClick={selectCell} />
-					))}
-				</Fragment>
-			))}
+			{layout.map((row, i) => {
+				const move = moveLookup.get(i);
+
+				return (
+					<div
+						key={i}
+						className={clsx({
+							row: true,
+							moveRowVertical:
+								move?.direction === "up" ||
+								move?.direction === "down",
+							moveRowHorizontal:
+								move?.direction === "right" ||
+								move?.direction === "left",
+							moveRowUp: move?.direction === "up",
+							moveRowDown: move?.direction === "down",
+							moveRowLeft: move?.direction === "left",
+							moveRowRight: move?.direction === "right",
+							mixedContainer: type.mixed,
+						})}
+					>
+						{row.map((cell, j) => (
+							<Cell key={j} cell={cell} onClick={selectCell} />
+						))}
+					</div>
+				);
+			})}
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import LevelComponent from "./Level";
+import { generateGrid } from "../grid";
 
 const meta = {
 	title: "Level",
@@ -13,7 +14,7 @@ const meta = {
 		type: {
 			mixed: {
 				control: {
-					type: "boolean", // Toggle control for true/false
+					type: "boolean",
 				},
 				description: "Enable or disable mixed mode.",
 			},
@@ -21,22 +22,13 @@ const meta = {
 	},
 	args: {
 		type: {
-			move: {
-				direction: null, // Default direction is null
-			},
-			mixed: false, // Default value for mixed
+			mixed: false,
 		},
-		size: 2,
-		layout: [
-			["red", "yellow"],
-			["yellow", "blue"],
-		],
+		layout: generateGrid(4, "red"),
 	},
 	decorators: [
 		(Story) => (
-			<div
-				style={{ background: "black", width: "390px", height: "500px" }}
-			>
+			<div>
 				<Story />
 			</div>
 		),
@@ -50,67 +42,89 @@ type Story = StoryObj<typeof meta>;
 export const LevelGrid: Story = {
 	args: {
 		type: {
-			move: {
-				direction: null, // Example direction
-			},
-			mixed: false, // Example with mixed mode enabled
+			mixed: false,
 		},
-		layout: [
-			["blue", "red", "yellow"],
-			["yellow", "blue", "green"],
-			["red", "green", "blue"],
-			["red", "green", "blue"],
-			["red", "green", "blue"],
-		],
+		layout: generateGrid(2, "red"),
 	},
 };
 
-export const LevelMovingLeft: Story = {
+export const LargeLevelGrid: Story = {
 	args: {
 		type: {
-			move: {
-				direction: "left", // Example direction
-			},
-			mixed: false, // Example with mixed mode enabled
+			mixed: false,
 		},
-		layout: [
-			["blue", "red", "yellow"],
-			["yellow", "blue", "green"],
-			["red", "green", "blue"],
-		],
+		layout: generateGrid(10, "red"),
 	},
 };
 
-export const LevelMovingRight: Story = {
+export const ExtraLargeLevelGrid: Story = {
 	args: {
 		type: {
-			move: {
-				direction: "right", // Example direction
-			},
-			mixed: false, // Example with mixed mode enabled
+			mixed: false,
 		},
-		size: 3,
-		layout: [
-			["blue", "red", "yellow"],
-			["yellow", "blue", "green"],
-			["red", "green", "blue"],
-		],
+		layout: generateGrid(12, "red"),
+	},
+};
+
+export const LevelMoveRowVertical: Story = {
+	args: {
+		type: {
+			move: [
+				{
+					index: 0,
+					direction: "up",
+				},
+				{
+					index: 1,
+					direction: "down",
+				},
+				{
+					index: 2,
+					direction: "up",
+				},
+				{
+					index: 3,
+					direction: "up",
+				},
+			],
+			mixed: false,
+		},
+		layout: generateGrid(4, "red"),
+	},
+};
+
+export const LevelMoveRowHorizontal: Story = {
+	args: {
+		type: {
+			move: [
+				{
+					index: 0,
+					direction: "right",
+				},
+				{
+					index: 1,
+					direction: "left",
+				},
+				{
+					index: 2,
+					direction: "left",
+				},
+				{
+					index: 3,
+					direction: "left",
+				},
+			],
+			mixed: false,
+		},
+		layout: generateGrid(4, "red"),
 	},
 };
 
 export const LevelMixed: Story = {
 	args: {
 		type: {
-			move: {
-				direction: null, // Example direction
-			},
-			mixed: true, // Example with mixed mode enabled
+			mixed: true,
 		},
-		size: 3,
-		layout: [
-			["blue", "red", "yellow"],
-			["yellow", "blue", "green"],
-			["red", "green", "blue"],
-		],
+		layout: generateGrid(20, "red"),
 	},
 };

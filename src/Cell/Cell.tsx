@@ -9,7 +9,7 @@ type CellProps = {
 	onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
-const FACE_SIZE = 60;
+export const FACE_SIZE = 60;
 
 const Cell = ({ cell, onClick }: CellProps) => {
 	const { gameState } = useGameState();
@@ -29,7 +29,7 @@ const Cell = ({ cell, onClick }: CellProps) => {
 		<div
 			onClick={onClick}
 			data-cell-color={cell}
-			className={clsx("cursor-pointer", "size-12", {
+			className={clsx("cell", "cursor-pointer", "size-12", {
 				mixed: type.mixed ? randomPosition.current : undefined,
 			})}
 			data-is-target={isTarget ? "target" : undefined}

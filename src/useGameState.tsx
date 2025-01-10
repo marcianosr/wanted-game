@@ -14,14 +14,16 @@ export type GameState = {
 	config: LevelConfig;
 };
 
-type Direction = "up" | "down" | "left" | "right";
+export type Direction = "up" | "down" | "left" | "right";
 
 export type TargetType = "red" | "blue" | "green" | "yellow" | "purple";
 
+type Move = {
+	direction: Direction | null;
+	index: number;
+};
 export type LevelType = {
-	move: {
-		direction: Direction | null;
-	};
+	move?: Move[];
 	mixed: boolean;
 };
 
@@ -43,20 +45,29 @@ export const handleMaxCharactersInField = (rows: number) => {
 };
 export const increaseCharactersInField = (currentLevel: number) =>
 	Math.min(currentLevel * 2, MAX_ROW_SIZE);
+
+// Math.min(
+// 	Math.ceil(Math.sqrt(currentLevel * 2)), // Increase size gradually
+// 	Math.floor(Math.sqrt(200)) // Cap the grid size
+// );
+
 export const generateConfigLevel = (currentLevel: number): LevelConfig => {
 	const target = getRandomTarget();
 	const size = increaseCharactersInField(currentLevel);
-	const charactersInField = size * size;
 
 	return {
 		target,
 		size,
 		layout: generateGrid(size, target),
 		type: {
-			move: {
-				direction: null,
-			},
-			mixed: handleMaxCharactersInField(size),
+			move: [
+				{
+					direction: null,
+					index: [],
+				},
+			],
+			// mixed: handleMaxCharactersInField(size),
+			mixed: currentLevel > 20,
 		},
 	};
 };
@@ -71,9 +82,12 @@ const GameStateContext = createContext<GameStateContextProps>({
 			size: 0,
 			layout: [],
 			type: {
-				move: {
-					direction: null,
-				},
+				move: [
+					{
+						direction: null,
+						index: [],
+					},
+				],
 				mixed: false,
 			},
 		},
