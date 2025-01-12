@@ -1,4 +1,4 @@
-import { Character, CHARACTERS } from "./grid";
+import { Character, CHARACTERS } from "./constants";
 
 export const getRandomTarget = (): Character => {
 	const keys = Object.keys(CHARACTERS);

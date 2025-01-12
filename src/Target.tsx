@@ -1,4 +1,4 @@
-import { CHARACTERS } from "./grid";
+import { CHARACTERS } from "./constants";
 import { useGameState } from "./useGameState";
 
 const Target = () => {

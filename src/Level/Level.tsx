@@ -1,12 +1,7 @@
 import clsx from "clsx";
-import Cell, { FACE_SIZE } from "../Cell/Cell";
-import {
-	Direction,
-	generateConfigLevel,
-	LevelType,
-	useGameState,
-} from "../useGameState";
-import { Character } from "../grid";
+import Cell from "../Cell/Cell";
+import { generateConfigLevel, LevelType, useGameState } from "../useGameState";
+import { Character } from "../constants";
 
 type LevelProps = {
 	type: LevelType;

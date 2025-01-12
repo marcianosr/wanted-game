@@ -1,15 +1,13 @@
 import clsx from "clsx";
-import { Character, CHARACTERS } from "../grid";
 import { MAX_WIDTH } from "../Container";
 import { LevelConfig, useGameState } from "../useGameState";
 import { useRef } from "react";
+import { Character, CHARACTERS, FACE_SIZE } from "../constants";
 
 type CellProps = {
 	cell: Character;
 	onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };
-
-export const FACE_SIZE = 60;
 
 const Cell = ({ cell, onClick }: CellProps) => {
 	const { gameState } = useGameState();

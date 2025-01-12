@@ -1,18 +1,4 @@
-import mario from "./assets/mario.png";
-import luigi from "./assets/luigi.png";
-import wario from "./assets/wario.png";
-import yoshi from "./assets/yoshi.png";
-import waluigi from "./assets/waluigi.png";
-
-export const CHARACTERS = {
-	red: mario,
-	blue: luigi,
-	yellow: wario,
-	green: yoshi,
-	purple: waluigi,
-} as const;
-
-export type Character = keyof typeof CHARACTERS;
+import { Character, CHARACTERS } from "./constants";
 
 export const generateGrid = (size: number, target: Character) => {
 	const keys = Object.keys(CHARACTERS).filter((key) => key !== target);

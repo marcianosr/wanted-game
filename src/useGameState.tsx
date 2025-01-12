@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { getRandomTarget } from "./getRandomTarget";
-import { Character, generateGrid } from "./grid";
+import { generateGrid } from "./grid";
+import { Character } from "./constants";
 
 interface GameStateContextProps {
 	gameState: GameState;
