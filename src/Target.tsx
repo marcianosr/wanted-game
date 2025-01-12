@@ -12,7 +12,7 @@ const Target = () => {
 				alt={gameState.config.target}
 				className="w-40"
 			/>
-			- level {gameState.currentLevel}
+			Level {gameState.currentLevel}
 		</div>
 	);
 };
