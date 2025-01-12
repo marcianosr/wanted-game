@@ -99,13 +99,15 @@ const GameStateContext = createContext<GameStateContextProps>({
 });
 
 const GameStateProvider = ({ children }: { children: ReactNode }) => {
-	const [gameState, setGameState] = useState<GameState>({
+	const INITIAL_GAME_STATE: GameState = {
 		currentLevel: 1,
 		score: 0,
-		time: 100,
+		time: 10,
 		config: generateConfigLevel(1),
 		gameover: false,
-	});
+	};
+
+	const [gameState, setGameState] = useState<GameState>(INITIAL_GAME_STATE);
 
 	const updateGameState = (
 		newState: Partial<GameState>,
@@ -120,15 +122,7 @@ const GameStateProvider = ({ children }: { children: ReactNode }) => {
 		});
 	};
 
-	const restartGame = () => {
-		setGameState({
-			currentLevel: 1,
-			score: 0,
-			time: 100,
-			config: generateConfigLevel(1),
-			gameover: false,
-		});
-	};
+	const restartGame = () => setGameState(INITIAL_GAME_STATE);
 
 	return (
 		<GameStateContext.Provider
