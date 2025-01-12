@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { MAX_WIDTH } from "../Container";
-import { LevelConfig, useGameState } from "../useGameState";
-import { useMemo, useRef } from "react";
+import { useGameState } from "../useGameState";
+import { useMemo } from "react";
 import { Character, CHARACTERS, FACE_SIZE } from "../constants";
 
 type CellProps = {
