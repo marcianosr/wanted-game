@@ -5,6 +5,10 @@ const Timer = () => {
 	const { gameState, setGameState } = useGameState();
 
 	useEffect(() => {
+		if (gameState.isPaused) {
+			return;
+		}
+
 		if (gameState.time <= 0) {
 			return setGameState({
 				gameover: true,
@@ -18,11 +22,11 @@ const Timer = () => {
 		}, 1000);
 
 		return () => clearInterval(timerId); // Clean up on unmount
-	}, [gameState.time, setGameState]);
+	}, [gameState.isPaused, gameState.time, setGameState]);
 
 	return (
 		<div className="timer">
-			<span>Time Left: {gameState.time}s</span>
+			<span>Time Left: {gameState.time}</span>
 		</div>
 	);
 };

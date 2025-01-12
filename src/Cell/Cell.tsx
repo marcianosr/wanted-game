@@ -24,6 +24,8 @@ const Cell = ({ cell, onClick }: CellProps) => {
 
 	const cellClasses = clsx("cell", "cursor-pointer", "size-12", {
 		mixed: gameState.config.type.mixed,
+		"opacity-0": gameState.isTransitioning && !isTarget,
+		flicker: gameState.isTransitioning && isTarget,
 	});
 
 	return (

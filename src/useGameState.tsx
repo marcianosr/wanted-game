@@ -14,7 +14,9 @@ export type GameState = {
 	score: number;
 	time: number;
 	config: LevelConfig;
-	gameover?: boolean;
+	gameover: boolean;
+	isPaused: boolean;
+	isTransitioning: boolean;
 };
 
 export type Direction = "up" | "down" | "left" | "right";
@@ -105,6 +107,8 @@ const GameStateProvider = ({ children }: { children: ReactNode }) => {
 		time: 10,
 		config: generateConfigLevel(1),
 		gameover: false,
+		isPaused: false,
+		isTransitioning: false,
 	};
 
 	const [gameState, setGameState] = useState<GameState>(INITIAL_GAME_STATE);
