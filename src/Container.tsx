@@ -1,6 +1,7 @@
 import GameStats from "./GameStats";
 import { useGameState } from "./useGameState";
 import Level from "./Level/Level";
+import GameOver from "./GameOver/GameOver";
 
 export const MAX_WIDTH = 900;
 
@@ -9,14 +10,20 @@ const Container = () => {
 
 	return (
 		<section className="h-full flex flex-col items-center">
-			<GameStats />
-			{/* Playable viewport */}
-			<div className="viewport">
-				<Level
-					type={gameState.config.type}
-					layout={gameState.config.layout}
-				/>
-			</div>
+			{gameState.gameover ? (
+				<GameOver />
+			) : (
+				<>
+					<GameStats />
+					{/* Playable viewport */}
+					<div className="viewport">
+						<Level
+							type={gameState.config.type}
+							layout={gameState.config.layout}
+						/>
+					</div>
+				</>
+			)}
 		</section>
 	);
 };

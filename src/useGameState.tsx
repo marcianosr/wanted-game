@@ -6,6 +6,7 @@ import { Character } from "./constants";
 interface GameStateContextProps {
 	gameState: GameState;
 	setGameState: (newState: Partial<GameState>) => void;
+	restartGame: () => void;
 }
 
 export type GameState = {
@@ -13,6 +14,7 @@ export type GameState = {
 	score: number;
 	time: number;
 	config: LevelConfig;
+	gameover?: boolean;
 };
 
 export type Direction = "up" | "down" | "left" | "right";
@@ -102,6 +104,7 @@ const GameStateProvider = ({ children }: { children: ReactNode }) => {
 		score: 0,
 		time: 100,
 		config: generateConfigLevel(1),
+		gameover: false,
 	});
 
 	const updateGameState = (
@@ -117,9 +120,19 @@ const GameStateProvider = ({ children }: { children: ReactNode }) => {
 		});
 	};
 
+	const restartGame = () => {
+		setGameState({
+			currentLevel: 1,
+			score: 0,
+			time: 100,
+			config: generateConfigLevel(1),
+			gameover: false,
+		});
+	};
+
 	return (
 		<GameStateContext.Provider
-			value={{ gameState, setGameState: updateGameState }}
+			value={{ gameState, setGameState: updateGameState, restartGame }}
 		>
 			{children}
 		</GameStateContext.Provider>

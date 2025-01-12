@@ -1,4 +1,5 @@
 import Target from "./Target";
+import Timer from "./Timer/Timer";
 import { useGameState } from "./useGameState";
 
 const GameStats = () => {
@@ -7,7 +8,7 @@ const GameStats = () => {
 	return (
 		<>
 			<Target />
-			<time>{gameState.time}</time>
+			<Timer />
 			<span>score: {gameState.score}</span>
 		</>
 	);

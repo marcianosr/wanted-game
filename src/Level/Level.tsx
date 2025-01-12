@@ -17,8 +17,8 @@ const Level = ({ type, layout }: LevelProps) => {
 			gameState.config.target
 		) {
 			return setGameState({
-				score: gameState.score - 1,
-				time: gameState.time - 10,
+				score: Math.max(gameState.score - 1, 0), // Deduct 1 point but ensure score doesn't go below 0
+				time: Math.max(gameState.time - 10, 0), // Deduct 10 seconds but ensure time doesn't go below 0
 			});
 		}
 
@@ -26,12 +26,11 @@ const Level = ({ type, layout }: LevelProps) => {
 			currentLevel: gameState.currentLevel + 1,
 			score: gameState.score + 1,
 			config: generateConfigLevel(gameState.currentLevel + 1),
+			time: gameState.time + 5,
 		});
 	};
 
 	const moveLookup = new Map(type.move?.map((move) => [move.index, move]));
-
-	console.log("layout", layout);
 
 	return (
 		<div
