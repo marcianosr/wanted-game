@@ -18,6 +18,8 @@ const Level = ({ type, layout }: LevelProps) => {
 			e.currentTarget.getAttribute("data-cell-color") ===
 			gameState.config.target;
 
+		console.log(e.currentTarget.getAttribute("data-cell-color"));
+
 		if (!isCorrect) {
 			return setGameState({
 				score: Math.max(gameState.score - 1, 0), // Deduct 1 point but ensure score doesn't go below 0
@@ -48,7 +50,8 @@ const Level = ({ type, layout }: LevelProps) => {
 
 	return (
 		<div
-			className={clsx("container", {
+			className={clsx("baseContainer", {
+				// mixedContainer: type.mixed,
 				vertical: type.move?.some(
 					(move) =>
 						move.direction === "up" || move.direction === "down"

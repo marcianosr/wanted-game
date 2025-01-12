@@ -39,7 +39,7 @@ export type LevelConfig = {
 	type: LevelType;
 };
 
-const MAX_ROW_SIZE = 12;
+const MAX_ROW_SIZE = 14; // 14x14 grid: 700x700
 
 export const handleMaxCharactersInField = (rows: number) => {
 	if (rows >= MAX_ROW_SIZE) {
@@ -65,14 +65,9 @@ export const generateConfigLevel = (currentLevel: number): LevelConfig => {
 		size,
 		layout: generateGrid(size, target),
 		type: {
-			move: [
-				{
-					direction: null,
-					index: [],
-				},
-			],
+			move: [],
 			// mixed: handleMaxCharactersInField(size),
-			mixed: currentLevel > 20,
+			mixed: currentLevel > 5,
 		},
 	};
 };
@@ -87,24 +82,25 @@ const GameStateContext = createContext<GameStateContextProps>({
 			size: 0,
 			layout: [],
 			type: {
-				move: [
-					{
-						direction: null,
-						index: [],
-					},
-				],
+				move: [],
 				mixed: false,
 			},
 		},
+		gameover: false,
+		isPaused: false,
+		isTransitioning: false,
 	},
 	setGameState: () => {},
+	restartGame: function (): void {
+		throw new Error("Function not implemented.");
+	},
 });
 
 const GameStateProvider = ({ children }: { children: ReactNode }) => {
 	const INITIAL_GAME_STATE: GameState = {
 		currentLevel: 1,
 		score: 0,
-		time: 10,
+		time: 1000,
 		config: generateConfigLevel(1),
 		gameover: false,
 		isPaused: false,

@@ -9,7 +9,7 @@ const Container = () => {
 	const { gameState } = useGameState();
 
 	return (
-		<section className="h-full flex flex-col items-center">
+		<section className="">
 			{gameState.gameover ? (
 				<GameOver />
 			) : (

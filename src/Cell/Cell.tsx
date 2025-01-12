@@ -1,8 +1,15 @@
 import clsx from "clsx";
-import { MAX_WIDTH } from "../Container";
+
 import { useGameState } from "../useGameState";
 import { useMemo } from "react";
-import { Character, CHARACTERS, FACE_SIZE } from "../constants";
+import {
+	Character,
+	CHARACTERS,
+	CONTAINER_HEIGHT,
+	CONTAINER_WIDTH,
+	FACE_SIZE,
+	MARGIN,
+} from "../constants";
 
 type CellProps = {
 	cell: Character;
@@ -12,17 +19,22 @@ type CellProps = {
 const Cell = ({ cell, onClick }: CellProps) => {
 	const { gameState } = useGameState();
 
-	const randomPosition = useMemo(
-		() => ({
-			top: `${Math.floor(Math.random() * (MAX_WIDTH - FACE_SIZE))}px`,
-			left: `${Math.floor(Math.random() * (MAX_WIDTH - FACE_SIZE))}px`,
-		}),
-		[]
-	);
+	const randomPosition = useMemo(() => {
+		const top =
+			Math.floor(
+				Math.random() * (CONTAINER_HEIGHT - FACE_SIZE - 2 * MARGIN)
+			) + MARGIN;
+		const left =
+			Math.floor(
+				Math.random() * (CONTAINER_WIDTH - FACE_SIZE - 2 * MARGIN)
+			) + MARGIN;
+
+		return { top: `${top}px`, left: `${left}px` };
+	}, []);
 
 	const isTarget = cell === gameState.config.target;
 
-	const cellClasses = clsx("cell", "cursor-pointer", "size-12", {
+	const cellClasses = clsx("cell", "cursor-pointer", "size-[50px]", {
 		mixed: gameState.config.type.mixed,
 		"opacity-0": gameState.isTransitioning && !isTarget,
 		flicker: gameState.isTransitioning && isTarget,

@@ -14,3 +14,7 @@ export const CHARACTERS = {
 
 export type Character = keyof typeof CHARACTERS;
 export const FACE_SIZE = 60;
+
+export const CONTAINER_WIDTH = 700;
+export const CONTAINER_HEIGHT = 700;
+export const MARGIN = 20;
